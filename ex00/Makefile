@@ -1,4 +1,4 @@
-NAME = kunteynir
+NAME = btc
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++20
