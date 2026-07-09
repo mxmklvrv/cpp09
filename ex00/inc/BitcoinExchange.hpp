@@ -17,6 +17,6 @@ public:
 	~BitcoinExchange() = default;
 
 	void loadData();
-	
+	void processInputFile(std::string& file);
 };
 
