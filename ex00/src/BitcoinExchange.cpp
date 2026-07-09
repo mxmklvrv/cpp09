@@ -2,6 +2,8 @@
 
 #include <exception>
 #include <fstream>
+#include <chrono>
+#include <sstream>
 
 BitcoinExchange::BitcoinExchange(){
 	loadData();
@@ -57,5 +59,28 @@ void BitcoinExchange::parseStr(std::string& str){
 		auto result = std::stof(value) * rate;
 		std::cout << date << " => " << result << std::endl;
 	}
+}
 
+bool BitcoinExchange::confirmDate(std::string& date){
+	std::istringstream is(date);
+
+	int year, month, day;
+	char dash_1, dash_2, extra;
+
+	if(!(is >> year >> dash_1 >> month >> dash_2 >> day))
+		return false;
+	if(is >> extra)
+		return false;
+	if(dash_1 != '-' || dash_2 != '-')
+		return false;
+	if(month < 1 || month > 12 || day < 1 || day > 31)
+		return false;
+
+	std::chrono::year_month_day ymd{
+		std::chrono::year{year},
+		std::chrono::month{static_cast<unsigned>(month)},
+		std::chrono::day{static_cast<unsigned>day}
+	};
+
+	return ymd.ok();
 }
