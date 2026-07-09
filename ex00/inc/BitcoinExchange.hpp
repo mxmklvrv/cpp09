@@ -18,5 +18,9 @@ public:
 
 	void loadData();
 	void processInputFile(std::string& file);
+	void parseStr(std::string& str);
+	bool confirmDate(std::string& date);
+	bool confirmValue(std::string& value);
+	void findeRate(std::string& date);
 };
 
