@@ -7,7 +7,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 INCLUDES = -I ./inc
-HEADERS = inc/easyfind.hpp inc/BitcoinExchange.hpp
+HEADERS = inc/BitcoinExchange.hpp
 
 SRCS = src/main.cpp src/BitcoinExchange.cpp
 OBJS = $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRCS))

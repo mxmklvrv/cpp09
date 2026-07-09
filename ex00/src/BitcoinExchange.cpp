@@ -69,18 +69,52 @@ bool BitcoinExchange::confirmDate(std::string& date){
 
 	if(!(is >> year >> dash_1 >> month >> dash_2 >> day))
 		return false;
-	if(is >> extra)
+	if(is >> extra){
+		std::cerr << "Error: bad date format " << date << std::endl;
 		return false;
-	if(dash_1 != '-' || dash_2 != '-')
+	}
+	if(dash_1 != '-' || dash_2 != '-'){
+		std::cerr << "Error: bad date format " << date << std::endl;
 		return false;
-	if(month < 1 || month > 12 || day < 1 || day > 31)
+	}
+	if(month < 1 || month > 12 || day < 1 || day > 31){
+		std::cerr << "Error: bad date format " << date << std::endl;
 		return false;
-
+	}
 	std::chrono::year_month_day ymd{
 		std::chrono::year{year},
 		std::chrono::month{static_cast<unsigned>(month)},
-		std::chrono::day{static_cast<unsigned>day}
+		std::chrono::day{static_cast<unsigned>(day)}
 	};
 
 	return ymd.ok();
+}
+
+bool BitcoinExchange::confirmValue(std::string& value){
+	float res;
+	try{
+		res = std::stof(value);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Error:" << e.what() << '\n';
+		return false;
+	}
+	if(res < 0 || res > 1000){
+		std::cerr << "Error: bad value " << value << std::endl;
+		return false;
+	}
+	return true;
+}
+
+float BitcoinExchange::findRate(std::string& date){
+	auto it = _data.lower_bound(date);
+	if(it != _data.end() && it->first == date)
+		return it->second;
+	if(it == _data.begin()){
+		std::cerr << "Error: No earlier dates" << std::endl;
+		return -1;
+	}
+	--it;
+	return it->second;
 }

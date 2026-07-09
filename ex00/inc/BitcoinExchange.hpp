@@ -21,6 +21,6 @@ public:
 	void parseStr(std::string& str);
 	bool confirmDate(std::string& date);
 	bool confirmValue(std::string& value);
-	void findeRate(std::string& date);
+	float findRate(std::string& date);
 };
 
