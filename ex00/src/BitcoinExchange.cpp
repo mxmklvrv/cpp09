@@ -44,7 +44,7 @@ void BitcoinExchange::processInputFile(std::string& file){
 void BitcoinExchange::parseStr(std::string& str){
 	size_t separator = str.find('|');
 	if(separator == std::string::npos){
-		std::cerr << "NO separator between date and value found";
+		std::cerr << "Error: wrong format -> " << str << std::endl;
 		return ;
 	}
 	std::string date = str.substr(0, separator);
@@ -57,7 +57,7 @@ void BitcoinExchange::parseStr(std::string& str){
 		if(rate < 0)
 			return ;
 		auto result = std::stof(value) * rate;
-		std::cout << date << " => " << result << std::endl;
+		std::cout << date <<" => " <<  value <<" = " << result << std::endl;
 	}
 }
 
@@ -70,15 +70,15 @@ bool BitcoinExchange::confirmDate(std::string& date){
 	if(!(is >> year >> dash_1 >> month >> dash_2 >> day))
 		return false;
 	if(is >> extra){
-		std::cerr << "Error: bad date format " << date << std::endl;
+		std::cerr << "Error: bad date format -> " << date << std::endl;
 		return false;
 	}
 	if(dash_1 != '-' || dash_2 != '-'){
-		std::cerr << "Error: bad date format " << date << std::endl;
+		std::cerr << "Error: bad date format -> " << date << std::endl;
 		return false;
 	}
 	if(month < 1 || month > 12 || day < 1 || day > 31){
-		std::cerr << "Error: bad date format " << date << std::endl;
+		std::cerr << "Error: bad date format -> " << date << std::endl;
 		return false;
 	}
 	std::chrono::year_month_day ymd{
@@ -92,8 +92,14 @@ bool BitcoinExchange::confirmDate(std::string& date){
 
 bool BitcoinExchange::confirmValue(std::string& value){
 	float res;
+	size_t pos;
+
 	try{
-		res = std::stof(value);
+		res = std::stof(value, &pos);
+		if(pos != value.length()){
+			std::cerr << "Error: bad value -> " << value << std::endl;
+			return false;
+		}
 	}
 	catch(const std::exception& e)
 	{
@@ -101,7 +107,7 @@ bool BitcoinExchange::confirmValue(std::string& value){
 		return false;
 	}
 	if(res < 0 || res > 1000){
-		std::cerr << "Error: bad value " << value << std::endl;
+		std::cerr << "Error: bad value -> " << value << std::endl;
 		return false;
 	}
 	return true;
