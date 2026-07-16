@@ -18,5 +18,8 @@ public:
 	void parseInput(int ac, char **av);
 	void printVec();
 	void printDeq();
+
+	std::vector<int> fordVec(std::vector<int>& vec);
+	std::deque<int> fordDeq(std::vector<int>& deq);
 };
 

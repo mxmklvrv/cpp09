@@ -34,3 +34,31 @@ void PmergeMe::printDeq(){
 }
 
 
+std::vector<int> PmergeMe::fordVec(std::vector<int>& vec){
+	// base case, with one num only, nothing to do here.
+	if (vec.size() <= 1)
+		return vec;
+	// checks if input is odd. if so, svaing the last num to make pairs.
+	bool hasOdd = (vec.size() % 2 != 0);
+	int odd = 0;
+	if(hasOdd)
+		odd = vec.back();
+	// creating a pairs
+	std::vector<std::pair<int, int>> pairs;
+	pairs.reserve(vec.size() / 2);
+
+	for (size_t i = 0; i + 1 < vec.size(); i+= 2)
+	{
+		int first = vec[i];
+		int second = vec[i + 1];
+		if(first < second)
+			std::swap(first, second);
+		pairs.emplace_back(first, second);
+	}
+
+	// extracting winners
+	std::vector<int> winners;
+	winners.reserve(pairs.size());
+	for(auto& pair : pairs)
+		winners.push_back(pair.first);
+}
