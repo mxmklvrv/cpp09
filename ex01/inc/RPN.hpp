@@ -13,7 +13,7 @@ public:
 	RPN& operator=(const RPN& other) = delete;
 	~RPN() = default;
 
-	void calculate(std::string& input);
+	void decider(std::string& input);
 	void handleOperator(char token);
 
 };
