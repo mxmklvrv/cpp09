@@ -21,5 +21,7 @@ public:
 
 	std::vector<int> fordVec(std::vector<int>& vec);
 	std::deque<int> fordDeq(std::vector<int>& deq);
+
+	std::vector<int> getOrder(size_t n);
 };
 
