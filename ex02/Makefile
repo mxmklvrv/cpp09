@@ -1,4 +1,4 @@
-NAME = Mutant
+NAME = PmergeMe
 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++20

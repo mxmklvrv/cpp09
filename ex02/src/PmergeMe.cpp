@@ -37,7 +37,7 @@ void PmergeMe::printDeq(){
 std::deque<int> PmergeMe::fordDeq(std::deque<int>& deq){
 	if(deq.size() <= 1)
 		return deq;
-		bool hasOdd = (deq.size() % 2 != 0);
+	bool hasOdd = (deq.size() % 2 != 0);
 	int odd = 0;
 	if(hasOdd)
 		odd = deq.back();
