@@ -18,10 +18,13 @@ public:
 	void parseInput(int ac, char **av);
 	void printVec();
 	void printDeq();
+	void sortVec();
+	void sortDeq();
+
 
 	std::vector<int> fordVec(std::vector<int>& vec);
 	std::deque<int> fordDeq(std::deque<int>& deq);
-
+	
 	std::vector<int> getOrder(size_t n);
 };
 

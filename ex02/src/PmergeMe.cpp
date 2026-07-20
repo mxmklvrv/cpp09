@@ -185,3 +185,11 @@ std::vector<int> PmergeMe::getOrder(size_t n){
 	return finalOrder;
 
 }
+
+void PmergeMe::sortDeq(){
+	_deq = fordDeq(_deq);
+}
+
+void PmergeMe::sortVec(){
+	_vec = fordVec(_vec);
+}
