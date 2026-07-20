@@ -20,7 +20,7 @@ public:
 	void printDeq();
 
 	std::vector<int> fordVec(std::vector<int>& vec);
-	std::deque<int> fordDeq(std::vector<int>& deq);
+	std::deque<int> fordDeq(std::deque<int>& deq);
 
 	std::vector<int> getOrder(size_t n);
 };
