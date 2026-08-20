@@ -1,20 +1,17 @@
-#include  "RPN.hpp"
+#include "RPN.hpp"
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
 
-void RPN::calculate(std::string& input){
-	std::istringstream stream(input);
-	std::string token;
-	while(stream >> token){
-		if(token.length() == 1 && std::string("+-*/").find(token[0]) != std::string::npos)
-			handleOperator(token[0]);
-		else if (token.length() == 1 && std::isdigit(token[0]))
-			_data.push(token[0] - '0');
-		else
-			throw std::runtime_error("Error: invalid token - " + token);
-	}
-	if(_data.size() != 1)
-		throw std::runtime_error("Error: bad input")
-	std::cout << "result: " << _data.top() << std::endl;
+int main (int ac, char **av){
+    if(ac != 2){
+        std::cerr << "Error, usage: ./RPN <your input>" << std::endl;
+        return 1;
+    }
+    try{
+        RPN rpn;
+        std::string input = av[1];
+        rpn.decider(input);
+    }catch(const std::exception& e){
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 }
